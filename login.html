@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduTasker Login</title>
+    <link rel="stylesheet" href="loginp1.css" />
+    <script type="module" src="login.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-banner"></div>
+
+      <div class="content">
+        <img src="illustration.png" alt="EduTasker Mascot" class="mascot" />
+
+        <h2 class="welcome">Welcome to</h2>
+        <h1 class="brand">EduTasker</h1>
+
+        <form class="login-form">
+          <label>
+            <input
+              type="text"
+              placeholder="Email or Username"
+              id="email"
+              required
+            />
+          </label>
+          <label>
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              required
+            />
+          </label>
+          <button id="submit" type="submit">LOGIN</button>
+        </form>
+
+        <p class="login-text">Or Log-In Using</p>
+        <button class="google-login">
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google Logo"
+          />
+          SIGN-UP
+        </button>
+        <p class="signup-link">
+          Don't have an account?
+          <a href="signup.html">Sign In</a>
+        </p>
+      </div>
+      <div class="section-divider"></div>
+      <section class="offer-section">
+        <div class="offer-container">
+          <div class="video-box">
+            <img src="your-image.jpg" alt="Video Thumbnail" />
+            <div class="play-button">▶</div>
+          </div>
+          <div class="content-box">
+            <div class="section-header">
+              <h2>WHAT WE OFFER</h2>
+              <div class="line"></div>
+              <h4>TUTORIAL</h4>
+              <div class="line"></div>
+            </div>
+            <p>
+              Write a paragraph that talks about your company here. You can talk
+              about your company’s background, history, mission, vision, or
+              philosophy – anything that will introduce your brand’s persona to
+              your audience. This will help build a connection between you and
+              them.
+            </p>
+          </div>
+        </div>
+      </section>
+      <div class="section-divider"></div>
+
+      <!--SECTION 3 | ABOUT US-->
+      <div class="about-container">
+        <!-- Branding -->
+        <div class="branding-section">
+          <h2>About Us</h2>
+          <img src="illustration.png" alt="Mascot" />
+          <h3>EduTasker</h3>
+        </div>
+
+        <!-- Info & Dropdowns -->
+        <div class="info-section">
+          <p>
+            EduTasker is your go-to productivity hub for school group projects.
+            It helps students manage tasks, collaborate efficiently, and track
+            progress — all in one easy-to-use platform.
+          </p>
+
+          <!-- Mission -->
+          <div class="dropdown-section">
+            <div class="dropdown-toggle">
+              Our Mission
+              <span class="dropdown-arrow" id="arrow-mission">▼</span>
+            </div>
+            <div class="dropdown-content" id="content-mission">
+              <p>
+                To provide students with a smart digital space that makes group
+                work easier, fairer, and more fun.
+              </p>
+            </div>
+          </div>
+
+          <!-- Vision -->
+          <div class="dropdown-section">
+            <div class="dropdown-toggle">
+              Our Vision
+              <span class="dropdown-arrow" id="arrow-vision">▼</span>
+            </div>
+            <div class="dropdown-content" id="content-vision">
+              <p>
+                We envision a learning environment where every student feels
+                empowered and connected through purposeful collaboration.
+              </p>
+            </div>
+          </div>
+
+          <!-- Team -->
+          <div class="dropdown-section">
+            <div class="dropdown-toggle">
+              Our Team
+              <span class="dropdown-arrow" id="arrow-team">▼</span>
+            </div>
+            <div class="dropdown-content" id="content-team">
+              <p>
+                EduTasker is built by passionate students and mentors who
+                believe in teamwork, innovation, and the power of education
+                technology.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <footer class="custom-footer">
+        <div class="footer-top">
+          <div class="footer-section branding">
+            <h2 class="logo">EduTasker</h2>
+            <p>
+              Empowering student collaboration, productivity, and creativity.
+            </p>
+          </div>
+
+          <div class="footer-section newsletter">
+            <p>
+              <strong>GET UPDATES ON STUDENT TOOLS AND PROJECT TIPS</strong>
+            </p>
+            <form class="subscribe-form">
+              <input type="email" placeholder="Your e-mail" required />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+
+          <div class="footer-section contact">
+            <div class="social">
+              <p><strong>Follow Us</strong></p>
+              <div class="icons">
+                <a href="#"
+                  ><img
+                    src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png"
+                    alt="Instagram"
+                /></a>
+                <a href="#"
+                  ><img
+                    src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png"
+                    alt="Facebook"
+                /></a>
+                <a href="#"
+                  ><img
+                    src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png"
+                    alt="Twitter"
+                /></a>
+              </div>
+            </div>
+            <div class="call">
+              <p><strong>Call Us</strong></p>
+              <p>(02) 1234 5678</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 EduTasker. All Rights Reserved</p>
+          <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

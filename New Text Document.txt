@@ -1,0 +1,33 @@
+              <h2>NEW TASK</h2>
+              <form class="space-y-4">
+                <div>
+                  <label>Task Name</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Task Detail</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Assign Member</label>
+                  <input type="text" />
+                </div>
+                <div class="relative">
+                  <label>Date Deadline</label>
+                  <input type="date" />
+                  
+                </div>
+                <div>
+                  <label class="relative">Time</label>
+                  <input type="time"  />
+                  
+                </div>
+              </form>
+              <div class="flex justify-center mt-6">
+                <button type="button" id="createTaskBtn" class="bg-[#1A5E63] text-white font-bold py-2 px-6 rounded-full hover:bg-[#144C51] transition duration-300">
+                  Create Task
+                </button>
+              </div>
+              <button onclick="closeModal()" class="close-btn">
+                <i class="fas fa-times"></i>
+              </button>

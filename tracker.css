@@ -1,0 +1,140 @@
+.group-tracker{
+    background-color: white;
+    padding: 4%;
+    border-radius: 1rem;
+    margin: 20 auto;
+    font-family: 'Glacial Indefference', sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    max-width: 1800px;
+    width: 95%;
+    
+    
+    
+}
+
+.tracker-header {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A5E63;
+    margin-bottom: 1rem;
+    border-bottom: 4px solid #EFEFDA;
+    padding-bottom: 0.5rem;
+    margin-top: -30;
+}
+
+.tracker-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    
+}
+
+.tracker-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.section-label {
+    font-weight: 600;
+    font-size: 18px;
+    color: #1A5E63;
+    margin-bottom: .1rem;
+    letter-spacing: -0.2px;
+    font-family: 'Glacial Indefference', sans-serif;
+  }
+  
+  .progress-container {
+    width: 120px;
+    max-width: 25vw;
+  }
+  
+  .progress-ring {
+    width: 100%;
+    height: auto;
+  }
+  
+  .progress-bg {
+    fill: none;
+    stroke: #E6E6CE;
+    stroke-width: 20;
+  }
+  
+  .progress-bar {
+    fill: none;
+    stroke: #16A085;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: 251.2;
+    transition: stroke-dashoffset 0.8s ease-out;
+  }
+  
+  .progress-label {
+    font-size: 18px;
+    font-weight: bold;
+    fill: #1A5E63;
+    text-anchor: middle;
+  }
+  
+  .task-count {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1A5E63;
+    margin-top: rem;
+  }
+  
+  .tasks {
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .task-item {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1A5E63;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .due {
+    font-weight: bold;
+    color: #1A5E63;
+  }
+  
+  .task-divider{
+    border: none;
+    border-top: 4px solid #EFEFDA;
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+  
+  .view-project-detail {
+    margin-top: 0.5rem;
+    background: none;
+    border: none;
+    color: #019267;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  
+  .view-project-detail::after {
+    content: ' ➤';
+    font-weight: bold;
+  }
+  
+  .divider-vertical {
+    width: 4px;
+    height: 100px;
+    background-color: #EFEFDA;
+  }
+
+  

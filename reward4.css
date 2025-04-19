@@ -1,0 +1,468 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #fff;
+  }
+  
+  /* ---------- SIDE BAR STYLE ---------- */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to bottom right, #ff8000, #ff9900);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .sidebar-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0 20px;
+    margin: 40px 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  .sidebar-menu li {
+    margin: 0;
+  }
+  
+  .sidebar-menu a {
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    display: block;
+    transition: 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+  }
+  
+  .sidebar-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .sidebar-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    background: linear-gradient(to right, #ff8000, #ff9900);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    position: relative;
+  }
+  
+  /* Hamburger menu */
+  .menu-icon i {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  
+  /* Centered logo in the navbar */
+  .logo {
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    padding-bottom: 40px; /* Space below the logo */
+  }
+  
+  /* Right icons */
+  .nav-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .icon i {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: white;
+  }
+  
+  .icon span {
+    font-size: 12px;
+    color: white;
+  }
+  
+  /* Title */
+  .title {
+    text-align: center;
+    font-size: 36px;
+    color: #007a1e;
+    margin: 40px 0 20px;
+    margin-top: 45px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bolder;
+  }
+
+  .top-bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px 15px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #1a5e63;
+    flex-wrap: wrap;
+  }
+  
+  .top-separator {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color:  #efefda;
+  }
+  
+  .rewards-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a5e63;
+    margin: 0;
+  }
+  
+  .coin-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+  
+  .coin-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff8e1;
+    border: 2px solid #f4c542;
+    border-radius: 25px;
+    padding: 5px 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .coin-display img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .coin-display span {
+    font-weight: bold;
+    color: #ff9800;
+    font-size: 16px;
+  }
+  
+  .add-coin-btn {
+    background-color: #1a5e63;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section {
+    padding: 25px 30px;
+  }
+  
+  .section h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #222;
+  }
+  
+  .daily-rewards,
+  .achievements {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .daily-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    border: 3px solid #1a5e63;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .daily-rewards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: fit-content; 
+  }
+  
+  .reward-card {
+    width: 120px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 3px solid #1a5e63;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .coin-background {
+    background-image: url("backgroundReward.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .coin-background img {
+    width: 60%;
+    height: auto;
+  }
+  
+  .claim-button {
+    background-color: #00b050;
+    color: white;
+    padding: 5px 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .reward-card,
+  .achievement-card {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+  }
+  
+  .reward-card img,
+  .achievement-card img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .reward-card button,
+  .achievement-card button {
+    background-color: #02a95c;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .achievement-card p {
+    font-weight: bold;
+    margin: 8px 0;
+    color: #222;
+  }
+  
+  .no-achievements {
+    padding: 20px;
+    background-color: #fdf1f1;
+    border: 1px dashed #e57373;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #d32f2f;
+    margin-bottom: 20px;
+  }
+  
+/* SECTION 4 | FOOTER */
+.custom-footer {
+    background-color: #f58a07;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 40px 20px;
+  }
+  
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-section {
+    flex: 1 1 30%;
+    min-width: 260px;
+  }
+  
+  .logo2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section p {
+    margin: 8px 0;
+    line-height: 1.5;
+  }
+  
+  .subscribe-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .subscribe-form input[type="email"] {
+    flex: 1 1 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    min-width: 180px;
+  }
+  
+  .subscribe-form button {
+    background-color: white;
+    color: #f58a07;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  .social .icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  .social a img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    margin-top: 30px;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom .links {
+    margin-top: 8px;
+  }
+  
+  .footer-bottom .links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: underline;
+  }
+  
+  /* ---------- FOOTER ---------- */
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      gap: 30px;
+    }
+  
+    .footer-section {
+      flex: 1 1 100%;
+      min-width: auto;
+    }
+  
+    .subscribe-form {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .subscribe-form input,
+    .subscribe-form button {
+      width: 100%;
+      max-width: 350px;
+    }
+  
+    .social .icons {
+      justify-content: center;
+    }
+  }
+  
+
+
+  .section-divider {
+    width: 100%;
+    height: 2px;
+    background-color:  #efefda;
+    margin: 40px auto; 
+    border-radius: 2px;
+  }

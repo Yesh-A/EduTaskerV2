@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>EduTasker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="group-page.css" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-title">EduTasker</a>
+      <i class="fas fa-times close-icon" id="closeSidebar"></i>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="Edutasker.html">Task Management</a></li>
+      <li><a href="commSec1.html">Communication & Engagement</a></li>
+      <li><a href="collabSec1.css">Collaboration & Document Editing</a></li>
+      <li><a href="#">Evaluation & Analytics</a></li>
+      <li><a href="reward.html">Rewards & Achievement</a></li>
+      <li><a href="shop.html">Shop</a></li>
+    </ul>
+    <div class="sidebar-footer">© EduTasker</div>
+  </div>
+
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <div class="menu-icon">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Centered Logo -->
+    <img src="illustration.png" alt="Logo" class="logo" />
+
+    <!-- Right Icons -->
+    <div class="nav-icons">
+      <div class="icon">
+        <i class="fas fa-cog"></i>
+        <span>SETTINGS</span>
+      </div>
+      <div class="icon">
+        <i class="fas fa-user-circle"></i>
+        <span>ACCOUNT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="title">EDUTASKER</div>
+
+  <!--MAIN CONTENT-->
+  <!-- Header -->
+  <div class="header">
+    <span>Collaboration & Document Editing</span>
+    <div id="groupDisplay">Loading group info...</div>
+  </div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">MEETING</h2>
+      <button class="add-meeting-btn" id="openModalBtn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    <hr class="divider" />
+    <p id="noMeetingsMessage">NO MEETING HAS BEEN SCHEDULED</p>
+    <div id="meetingList" class="meeting-list"></div>
+  </div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">FOLDERS</h2>
+      <i class="fas fa-plus add-icon" id="addFolderBtn"></i>
+    </div>
+    <hr class="divider" />
+    <p id="noFoldersMessage">NO FOLDER HAS BEEN CREATED</p>
+    <div id="folderList" class="folder-list"></div>
+  </div>
+
+  
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">COLLABORATION LINKS</h2>
+        <i class="fas fa-chevron-down toggle-link-form" id="dropLinkBtn"></i>
+      </div>
+    
+      <div class="link-form-container" id="linkFormContainer" style="display: none;">
+        <form id="linkForm">
+          <div class="form-row">
+            <label for="linkType">Type:</label>
+            <select id="linkType">
+              <option value="Google Docs">Google Docs</option>
+              <option value="Canva">Canva</option>
+              <!-- Add more as needed -->
+            </select>
+            <button type="button" id="addNewTypeBtn">+</button>
+          </div>
+          <input type="text" id="linkDescription" placeholder="Enter description" />
+          <input type="url" id="linkUrl" placeholder="Enter URL (e.g. https://...)" />
+          <button type="submit" id="addLinkBtn">Add Link</button>
+        </form>
+      </div>
+    
+      <hr class="divider" />
+      <p id="noLinkMessage">NO LINKS HAVE BEEN CREATED</p>
+      <div id="linkList" class="link-list"></div>
+    </div>    
+  
+  <!-- MODAL FOR ADDING NEW TYPE -->
+  <div class="modallink" id="newTypeModal">
+    <div class="modal-contentlink">
+      <span class="close-modallink" id="closeTypeModal">&times;</span>
+      <h3>Add New Link Type</h3>
+      <input type="text" id="newTypeInput" placeholder="Enter new type (e.g. Trello)" />
+      <button id="saveNewType">Save</button>
+    </div>
+  </div>
+
+  <!-- Meeting - Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <h3>Schedule a Meeting</h3>
+      <form id="meetingForm">
+        <label for="meetingName">Name of the Meeting:</label>
+        <input type="text" id="meetingName" name="meetingName" required />
+
+        <label for="meetingType">Type of Meeting:</label>
+        <select id="meetingType" name="meetingType" required>
+          <option value="">Select type</option>
+          <option value="face">Face to Face</option>
+          <option value="online">Online</option>
+        </select>
+
+        <div id="faceToFaceFields" class="conditional-fields hidden">
+          <label for="place">Place of Meeting:</label>
+          <input type="text" id="place" name="place" />
+        </div>
+
+        <div id="onlineFields" class="conditional-fields hidden">
+          <label for="onlinePlace">Place of Meeting:</label>
+          <input type="text" id="onlinePlace" name="onlinePlace" />
+
+          <label for="link">Provide Link:</label>
+          <input type="url" id="link" name="link" />
+        </div>
+
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" required />
+
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" required />
+
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!--FOLDER - MODAL-->
+  <div id="folderModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeFolderModal">&times;</span>
+      <h2>Create Folder</h2>
+      <form id="folderForm">
+        <label for="folderName">Name of Folder:</label>
+        <input type="text" id="folderName" name="folderName" required />
+
+        <label for="folderColor">Pick Folder Color:</label>
+        <input type="color" id="folderColor" name="folderColor" value="#f58a07" />
+
+        <button type="submit" class="modal-btn">Add Folder</button>
+      </form>
+    </div>
+  </div>
+  </div>
+
+
+  <!--FOOTER-->
+  <footer class="custom-footer">
+    <div class="footer-top">
+      <div class="footer-section branding">
+        <h2 class="logo2">EduTasker</h2>
+        <p>Empowering student collaboration, productivity, and creativity.</p>
+      </div>
+
+      <div class="footer-section newsletter">
+        <p>
+          <strong>GET UPDATES ON STUDENT TOOLS AND PROJECT TIPS</strong>
+        </p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Your e-mail" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <div class="footer-section contact">
+        <div class="social">
+          <p><strong>Follow Us</strong></p>
+          <div class="icons">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png" alt="Instagram" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png" alt="Twitter" /></a>
+          </div>
+        </div>
+        <div class="call">
+          <p><strong>Call Us</strong></p>
+          <p>(02) 1234 5678</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 EduTasker. All Rights Reserved</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script type="module" src="group-page.js"></script>
+</body>
+
+</html>

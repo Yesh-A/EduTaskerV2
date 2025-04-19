@@ -1,0 +1,173 @@
+<html lang="en">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<!---------------------------INTERNAL LINKS--------------------------------->
+<link rel="stylesheet" href="Assets/CSS/Dashboardcss.css">
+<link rel="stylesheet" href="Assets/CSS/taskModal.css">
+<link rel="stylesheet" href="Assets/CSS/groupModal.css">
+<link rel="stylesheet" href="Assets/CSS/tracker.css">
+<link rel="stylesheet" href="Assets/CSS/projectDetail.css">
+
+<!---------------------------INTERNAL LINKS--------------------------------->
+
+    <Head>
+        <meta charset="utf-8"/>
+        <meta content="Width=device-width, initial-scale=1.0" name="viewport"/>
+        <Title>EduTasker</Title>  
+        
+        
+    </Head>
+
+
+    <body class="bg-white">
+
+        <!-----------------------------Navigation Bar--------------------------------->
+        <header class="bg-[F58A07] p-4 flex justify-between items-center">
+            <!--Dropdown Menu-->
+            <div class="MnuDrpDwn">
+                <button class="nav-bar fas fa-bars fa-2x text-[#FFDD00] text-2x3 dropbtn p-4 hover:animate-pulse"style="transform: scaleX(1.5)"></button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+
+            </div>
+            <!--Dropdown Menu-->
+
+            <div class="flex space-x-5">
+                <!-- Settings Button-->
+                <div class="Sttngs flex flex-col items-center">
+                    <button class="fas fa-cog fa-2x text-[#FFDD00] hover:animate-spin duration-3000 mr-1"></button>
+                    <span class="text-[#FFFFFF] mt-1 text-sm font-bold" style="font-family: 'Glacial Indifference', sans-serif;" >SETTINGS</span>
+                </Div>
+                <!-- Settings Button-->
+
+                <!-- Account Button-->
+                <div class="Accnt flex flex-col items-center justify">
+                    <button class="fas fa-user-circle fa-2x text-[#FFDD00] bg-[#FFFFFF] rounded-full hover:animate-pulse "></button>
+                    <span class="text-[#FFFFFF] mt-1 text-sm font-bold" style="font-family: 'Glacial Indifference', sans-serif;" >ACCOUNT</span>
+                </div>
+                <!-- Account Button-->
+
+            </div>
+            
+        </header>
+        <!-----------------------------Navigation Bar--------------------------------->
+        
+        <!--LOGO-->
+        <div class="logo">
+            <img src="Assets/Images/Logo.webp" alt="Logo"> 
+            <div class="logo-text">EDUTASKER</div> 
+            
+        </div>
+        <!--LOGO-->
+
+        <!--DIVIDING LINE-->
+        <div class="divider"></div>
+        <div class="logo-divider"></div>
+        <!--DIVIDING LINE-->
+
+        <!-----------------------------TASK MANAGEMENT-------------------------------->
+
+        <div class="task-management bg-[F58A07] text-white flex items-center justify-between pt-8">
+            <h2 class="taskText">Task Management</h2>
+            <div class="relative w-16 h-16 flex items-center justify-center">
+                <button id="NewTaskBtn" class="text-[#FEBF00]">
+                  <i class="fas fa-plus fa-4x hover:animate-pulse"></i>
+                </button>
+            </div>
+            </div>
+            
+        </div>
+        <div>
+            <img class="Texture" src="Assets/Images/Texture.webp" alt="">
+        </div>
+
+        <div>
+            <h2 class="TextSelectProj">
+                SELECT PROJECT
+            </h2>
+        </div>
+        <!-----------------------------TASK MANAGEMENT-------------------------------->
+
+        <!-----------------------------NEW TASK MODAL--------------------------------->
+
+            <!-- Group Modal -->
+        <div id="groupModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 animate__animated">
+            <div class="bg-[#FFDD00] w-96 p-6 rounded-lg shadow-lg relative modal-content">
+            <h2 class="text-2xl font-bold text-[#1A5E63] mb-4">NEW GROUP</h2>
+
+            <!-- Group Name Input -->
+            <div class="mb-4">
+                <label class="block text-[#1A5E63] font-semibold mb-1">Group Name</label>
+                <input type="text" id="groupNameInput" class="w-full px-3 py-2 border border-[#1A5E63] rounded-md focus:outline-none focus:ring-2 focus:ring-[#1A5E63]" />
+            </div>
+
+            <!-- Add Members Input -->
+            <div class="mb-4">
+                <label class="block text-[#1A5E63] font-semibold mb-1">Add Members</label>
+                <div class="relative">
+                    <input id="memberInput" type="text" class="w-full px-3 py-2 pr-10 border border-[#1A5E63] rounded-md focus:outline-none focus:ring-2 focus:ring-[#1A5E63]"/>
+                    <button id="addMemberBtn" class="absolute top-1/2 right-2 transform -translate-y-1/2 text-[#1A5E63] p-1 rounded-full transition-all duration-200">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <div id="memberSuggestions" class="absolute top-full left-0 w-full bg-white border border-[#1A5E63] rounded-md mt-1 max-h-40 overflow-y-auto z-10"></div> <!-- Suggestion list -->
+                </div>
+            </div>
+              
+            <!-- Display Added Members -->
+            <div id="memberList" class="mb-4">
+                <!-- Members will appear here as they are added -->
+            </div>
+
+           
+            <!--CODE UNDER COMMENT IS FOR TESTING OUTPUT OF GROUP (REMOVE START OF COMMENT TO TEST) -->
+            
+            <div id="groupInfoDisplay" class="mt-4 p-4 border border-[#1A5E63] rounded-md bg-gray-100">
+           
+            </div>
+  
+            <!---------------------------------------------------------------------------------------->
+
+            <!-- CREATE GROUP BUTTON -->
+            <div class="flex justify-end mt-6">
+                
+                <button id="createGroupBtn" class="create-btn" disabled>CREATE NEW GROUP</button>
+
+            </div>
+
+            <!-- CLOSE BUTTON -->
+            <button onclick="closeGroupModal()" class="absolute top-2 right-2 text-[#1A5E63] p-2 rounded-full">
+                    <i class="fas fa-times"></i>
+            </button>
+
+         </div>
+        </div>
+        <!-----------------------------NEW TASK MODAL--------------------------------->
+
+        <!--------------------------------TRACKER------------------------------------->
+
+        <div id="parent-container">
+            <!-- New group tracker will be added dynamically here -->
+        </div>
+
+        <!--------------------------------TRACKER------------------------------------->
+
+
+        <!-----------------------------NEW TASK--------------------------------------->
+
+    <!---------------------SCRIPT------------------------->
+    <Script src="Assets/Script/taskModal.js"></Script>    
+    <Script src="Assets/Script/groupModal.js"></Script>
+    <script src="Assets/Script/tracker.js"></script>
+    <script src="Assets/Script/circle-progress.min.js" type ="module"></script>
+    <script src="Assets/Script/projectDetail.js"></script>
+    <!---------------------SCRIPT------------------------->
+    </body>
+</html>

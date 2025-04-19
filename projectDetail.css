@@ -1,0 +1,56 @@
+.project-detail {
+    display: none;
+    margin-top: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background-color: #fcfcf2;
+    font-family: 'Glacial Indifference', sans-serif;
+    animation: expandDetail 0.3s ease-in-out;
+  }
+  
+  @keyframes expandDetail {
+    from {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    to {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+  
+  .project-detail h3 {
+    font-size: 1.4rem;
+    color: #104e51;
+    margin-bottom: 1rem;
+  }
+  
+  .project-detail .section {
+    margin-bottom: 1.2rem;
+  }
+  
+  .project-detail .section-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #104e51;
+  }
+  
+  .project-detail .kanban-board-button {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+  }
+  
+  .project-detail .completed-section {
+    border: 2px solid green;
+    border-radius: 10px;
+    padding: 0.8rem;
+    overflow-y: auto;
+    max-height: 150px;
+  }
+  

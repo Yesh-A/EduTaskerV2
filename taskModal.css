@@ -1,0 +1,49 @@
+#taskModal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+
+}
+
+#taskModal .modal-content {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 24rem;
+    border: 4px solid #1A5E63;
+    position: relative;
+}
+
+#taskModal h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1A5E63;
+    text-align: center;
+}
+
+#taskModal label {
+    display: block;
+    font-weight: 600;
+    color: #1A5E63;
+}
+
+#taskModal input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid #ccc;
+    margin-top: 0.25rem;
+}
+
+#taskModal .close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: #1A5E63;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+}
