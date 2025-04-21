@@ -47,7 +47,7 @@ googleSignupBtn.addEventListener("click", function () {
   signInWithPopup(auth, provider)
     .then((result) => {
       alert("Signed up with Google!");
-      window.location.href = "login.html"; // redirect to login or dashboard
+      window.location.href = "index.html"; 
     })
     .catch((error) => {
       console.error("Google Sign-Up Error:", error);

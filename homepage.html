@@ -8,11 +8,8 @@
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="reward4.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="homepage.css" />
   </head>
   <body>
     <!-- Sidebar -->
@@ -57,90 +54,68 @@
     <!-- Title -->
     <div class="title">EDUTASKER</div>
 
-    <!-- MAIN CONTENTS -->
-    <header class="top-bar">
-      <div class="top-separator"></div>
-      <h1 class="rewards-title">REWARDS</h1>
-      <div class="coin-wrapper">
-        <div class="coin-display">
-          <img src="Coin.png" alt="Coin" />
-          <span>0</span>
-          <button class="add-coin-btn">+</button>
+    <div class="section-divider"></div>
+
+    <!-- Cards Grid -->
+    <div class="grid">
+      <a href="Edutasker.html"><div class="card orange">Task Management</div></a>
+      <a href="commSec1.html"><div class="card yellow">Communication & Engagement</div> </a>
+      <a href="collabSec1.css"><div class="card red">Collaboration & Document Editing</div> </a>
+      <a><div class="card green">Evaluation & Analytics</div></a>
+    </div>
+
+    <div class="section-divider"></div>
+
+
+    <div class="dashboard-panel">
+      <!-- Due Tasks Section -->
+      <div class="panel-box">
+        <h3 class="panel-title">DUE TASKS</h3>
+        <div class="panel-scroll" id="taskListContainer">
+          <p class="placeholder-text">Loading tasks from your planner...</p>
         </div>
       </div>
-    </header>
+    
+      <!-- Recent Notifications Section -->
+      <div class="panel-box">
+        <h3 class="panel-title">RECENT NOTIFICATION</h3>
+        <div class="panel-scroll" id="notificationContainer">
+          <p class="placeholder-text">Fetching your notifications...</p>
+        </div>
+      </div>
+    
+      <div class="section-divider"></div>
 
-    <!-- Daily Rewards -->
-    <section class="section">
-      <h2>DAILY REWARDS</h2>
-      <div class="daily-container">
-        <div class="daily-rewards">
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
+      <!-- Badges and Rewards Section -->
+      <div class="reward-section">
+        <div class="reward-header">
+          <h3 class="panel-title">BADGES + REWARDS</h3>
+          <a href="shop.html" class="shop-link">SHOP <i class="fas fa-shopping-cart"></i></a>
+        </div>
+    
+        <div class="badge-list" id="badgeContainer">
+          <!-- Placeholder badges -->
+          <div class="badge-item badge-gold">
+            <img src="mvp.png" alt="MVP Badge" class="badge-img">
+            <p class="badge-title">MVP</p>
+            <button class="reward-button">CLAIM REWARDS</button>
           </div>
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
+    
+          <div class="badge-item badge-red">
+            <img src="likable.png" alt="Most Likable Badge" class="badge-img">
+            <p class="badge-title">MOST LIKABLE</p>
+            <button class="reward-button">CLAIM REWARDS</button>
           </div>
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
-          </div>
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
-          </div>
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
-          </div>
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
+    
+          <div class="badge-item badge-orange">
+            <img src="bestwork.png" alt="Best Work Badge" class="badge-img">
+            <p class="badge-title">BEST WORK</p>
+            <button class="reward-button">CLAIM REWARDS</button>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Achievements -->
-    <section class="section">
-      <h2>ACHIEVEMENTS</h2>
-      <div id="no-achievements" class="no-achievements">
-        <p>No Claimable Awards Yet</p>
-      </div>
-
-      <div id="achievements" class="achievements">
-        <div class="achievement-card">
-          <img src="images/mvp.png" alt="MVP" />
-          <p>MVP</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-        <div class="achievement-card">
-          <img src="images/most-likable.png" alt="Most Likable" />
-          <p>MOST LIKABLE</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-        <div class="achievement-card">
-          <img src="images/best-work.png" alt="Best Work" />
-          <p>BEST WORK</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-      </div>
-    </section>
-
+    </div>
+    
     <div class="section-divider"></div>
 
     <!--FOOTER-->
@@ -198,6 +173,6 @@
       </div>
     </footer>
 
-    <script type="module" src="reward.js"></script>
+    <script type="module" src="homepage.js"></script>
   </body>
 </html>

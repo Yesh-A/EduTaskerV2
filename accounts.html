@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EduTasker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="accounts.css" />
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="homepage.html" class="sidebar-title">EduTasker</a>
+            <i class="fas fa-times close-icon" id="closeSidebar"></i>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="Edutasker.html">Task Management</a></li>
+            <li><a href="commSec1.html">Communication & Engagement</a></li>
+            <li><a href="collabSec1.html">Collaboration & Document Editing</a></li>
+            <li><a href="evalSec1.html">Evaluation & Analytics</a></li>
+            <li><a href="reward.html">Rewards & Achievement</a></li>
+            <li><a href="shop.html">Shop</a></li>
+        </ul>
+        <div class="sidebar-footer">© EduTasker</div>
+    </div>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        <img src="illustration.png" alt="Logo" class="logo" />
+        <div class="nav-icons">
+            <div class="icon">
+                <i class="fas fa-cog"></i><span>SETTINGS</span>
+            </div>
+            <div class="icon">
+                <a href="accounts.html"><i class="fas fa-user-circle"></i></a><span>ACCOUNT</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="title">EDUTASKER</div>
+    <div class="section-divider"></div>
+
+    <!-- Main Content -->
+    <header class="top-bar">
+        <div class="top-separator"></div>
+        <h1 class="acc-title">ACCOUNT</h1>
+        <div class="coin-wrapper">
+            <div class="coin-display">
+                <img src="Coin.png" alt="Coin" />
+                <span>0</span>
+                <button class="add-coin-btn">+</button>
+            </div>
+        </div>
+    </header>
+    <div class="section-divider2"></div>
+
+    <!-- Account Info -->
+    <div class="account-box">
+        <div class="account-info">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img id="profileImage" src="default-profile.jpg" alt="Profile Picture">
+                    <button id="changePicBtn">Change Picture</button>
+                    <input type="file" id="uploadPic" style="display: none" />
+                    <span id="uploadSpinner" style="display: none;">Uploading...</span>
+                </div>
+                <div class="user-details">
+                    <p><strong>User ID:</strong> <span id="userID"></span></p>
+                    <p><strong>Username:</strong> <span id="username"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="editable-info">
+            <label>Nickname: <input type="text" id="nickname" /></label>
+            <label>Birthday: <input type="date" id="birthday" /></label>
+            <label>Age: <input type="number" id="age" /></label>
+            <label>Pronouns: <input type="text" id="pronouns" /></label>
+            <label>Bio: <input type="text" id="bio" /></label>
+            <label>Availability: <input type="text" id="availability" /></label>
+        </div>
+
+        <div class="actions">
+            <button id="saveBtn" disabled>Save</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-section branding">
+                <h2 class="logo2">EduTasker</h2>
+                <p>Empowering student collaboration, productivity, and creativity.</p>
+            </div>
+
+            <div class="footer-section newsletter">
+                <p><strong>GET UPDATES ON STUDENT TOOLS AND PROJECT TIPS</strong></p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your e-mail" required />
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="footer-section contact">
+                <div class="social">
+                    <p><strong>Follow Us</strong></p>
+                    <div class="icons">
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png"
+                                alt="Instagram" /></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png"
+                                alt="Facebook" /></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png"
+                                alt="Twitter" /></a>
+                    </div>
+                </div>
+                <div class="call">
+                    <p><strong>Call Us</strong></p>
+                    <p>(02) 1234 5678</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 EduTasker. All Rights Reserved</p>
+            <div class="links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="accounts.js"></script>
+</body>
+
+</html>

@@ -16,11 +16,10 @@ const sidebar = document.getElementById('sidebar');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Remove 'active' from all
+     
       tabs.forEach(t => t.classList.remove('active'));
       tabContents.forEach(c => c.style.display = 'none');
 
-      // Add 'active' to clicked
       tab.classList.add('active');
       const id = tab.getAttribute('data-tab');
       document.getElementById(id).style.display = 'grid';
