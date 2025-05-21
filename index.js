@@ -1,7 +1,20 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+// 🔥 Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCPiw_BpB0lQqpJ8M_XkJgukwCAb9I2vQM",
   authDomain: "edutasker-cd056.firebaseapp.com",
@@ -15,42 +28,85 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
+let isLoggingIn = false;
+
+// ✅ Email/Password Login
 const submit = document.getElementById("submit"); 
 submit.addEventListener("click", function (event) {
   event.preventDefault();
+
+  if (isLoggingIn) return;
+  isLoggingIn = true;
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      alert("Loging in");
+    .then(async (userCredential) => {
+      const user = userCredential.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL || "https://via.placeholder.com/100"
+        });
+        console.log("User added to Firestore ✅");
+      }
+
+      alert("Logging in...");
       window.location.href = "homepage.html";
     })
     .catch((error) => {
       alert(error.message);
+    })
+    .finally(() => {
+      isLoggingIn = false;
     });
 });
 
+// ✅ Google Sign-In
 const googleLoginBtn = document.querySelector(".google-login");
-
 googleLoginBtn.addEventListener("click", function () {
+  if (isLoggingIn) return;
+  isLoggingIn = true;
+
   const provider = new GoogleAuthProvider();
 
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(async (result) => {
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL || "https://via.placeholder.com/100"
+        });
+        console.log("Google user added to Firestore ✅");
+      }
+
       alert("Logged in with Google!");
-      window.location.href = "homepage.html"; 
+      window.location.href = "homepage.html";
     })
     .catch((error) => {
       console.error("Google Login Error:", error);
       alert(error.message);
+    })
+    .finally(() => {
+      isLoggingIn = false;
     });
 });
 
-//GENERAL FUNCTIONS
-
+// GENERAL FUNCTIONS
 document.addEventListener("DOMContentLoaded", () => {
   const dropdowns = ["mission", "vision", "team"];
 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Analytics</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="evalSec2.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript -->
+    <script type="module" src="evalSec2.js"></script>
+  </head>
+  <body>
+
+       <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="homepage.html" class="sidebar-title">EduTasker</a>
+      <i class="fas fa-times close-icon" id="closeSidebar"></i>
+    </div>
+    <ul class="sidebar-menu">
+      <li>
+        <a href="taskmanagement.html"><i class="fa-solid fa-tasks"></i>Task Management</a>
+      </li>
+      <li>
+        <a href="commSec1.html"><i class="fa-solid fa-comments"></i>Communication & Engagement</a>
+      </li>
+      <li>
+        <a href="collabSec1.html"><i class="fa-solid fa-file-lines"></i>Collaboration & Document
+          Editing</a>
+      </li>
+      <li>
+        <a href="evalSec1.html"><i class="fa-solid fa-chart-line"></i>Evaluation & Analytics</a>
+      </li>
+      <li>
+        <a href="reward.html"><i class="fa-solid fa-trophy"></i>Rewards & Achievement</a>
+      </li>
+      <li>
+        <a href="shop.html"><i class="fa-solid fa-store"></i>Shop</a>
+      </li>
+    </ul>
+    <div class="sidebar-footer">© EduTasker</div>
+  </div>
+
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <!-- Left Hamburger -->
+    <div class="menu-icon" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Center Logo -->
+    <img src="illustration.png" alt="Logo" class="logo" />
+
+    <!-- Right Icons -->
+    <div class="nav-bar">
+      <!-- Mobile Three Dots -->
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+
+      <!-- Icons -->
+      <div class="nav-icons" id="navIcons">
+        <div class="icon notification">
+          <i class="fas fa-bell"></i>
+          <span class="badge">3</span>
+          <span class="icon-label">NOTIFICATIONS</span>
+        </div>
+        <div class="icon">
+          <i class="fas fa-cog"></i>
+          <span class="icon-label">SETTINGS</span>
+        </div>
+        <div class="icon">
+          <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
+          <span class="icon-label">ACCOUNT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Title -->
+    <div class="title">EDUTASKER</div>
+    
+    <!--MAIN CONTENT-->
+    <!-- Header -->
+    <div class="header">
+      <span>Evaluation & Analyticts</span>
+      <div id="groupDisplay">Loading group info...</div>
+    </div>
+
+    <main class="container">
+      <!-- Progress Overview -->
+      <section class="section">
+        <h3 class="section-title">
+          <i class="fas fa-chart-pie"></i> PROGRESS OVERVIEW
+        </h3>
+        <div class="progress-container">
+          <div class="chart-wrapper">
+            <canvas id="progressChart" width="300" height="300"></canvas>
+            <div id="progressLabel" class="chart-label">12.5%</div>
+          </div>
+          <ul class="task-info-list">
+            <li>
+              <strong>TOTAL TASK FOR THE PROJECT:</strong>
+              <span id="totalTasks">8</span>
+            </li>
+            <li>
+              <strong>REMAINING TASKS:</strong>
+              <span id="remainingTasks">7</span>
+            </li>
+            <li>
+              <strong>COMPLETED TASK:</strong>
+              <span id="completedTasks">1</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Task Contribution Table -->
+      <section class="section">
+        <h3 class="section-title">
+          <i class="fas fa-users"></i> TASK CONTRIBUTION BREAKDOWN
+        </h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>MEMBERS</th>
+                <th>TASKS COMPLETED</th>
+                <th>PERCENTAGE OF TOTAL CONTRIBUTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- JS will dynamically inject rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      <!-- TIME & EFFORT TRACKER -->
+      <div class="time-effort-tracker">
+        <h2>Time & Effort Tracker</h2>
+      
+        <div class="tracker-item">
+          <div class="label">
+            Project Start
+            <i class="fas fa-circle-question info-icon" data-tooltip="The day this project officially began."></i>
+          </div>
+          <div class="value" id="projectStartDate">Loading...</div>
+        </div>
+
+      
+        <div class="tracker-item">
+          <div class="label">
+            Project Deadline
+            <i class="fas fa-circle-question info-icon" data-tooltip="Select the due date for this project."></i>
+          </div>
+          <div class="value">
+            <input type="date" class="deadline-input" />
+          </div>
+        </div>
+      
+        <div class="tracker-item">
+          <div class="label">
+            Effort Status
+            <i class="fas fa-circle-question info-icon" data-tooltip="Activity based on login frequency."></i>
+          </div>
+          <div class="value" id="effortStatus">Calculating...</div>
+        </div>
+      
+        <div class="tracker-item full">
+          <div class="label">
+            Average Task Completion Time
+            <i class="fas fa-circle-question info-icon" data-tooltip="Average time taken to complete tasks."></i>
+          </div>
+          <div class="bar-chart-placeholder" id="averageCompletionChart"></div>          
+        </div>
+      
+        <div class="donut-chart-section">
+          <h3>
+            Missed vs. On-Time Tasks
+            <i class="fas fa-circle-question info-icon" data-tooltip="Visual of completed vs missed tasks."></i>
+          </h3>
+          <div class="donut-chart-placeholder" id="missedDonutChart"></div>
+          <div class="donut-labels">
+            <div class="on-time" id="onTimeLabel">On Time Task<br />--%</div>
+            <div class="missed" id="missedLabel">Missed Task<br />--%</div>
+          </div>
+        </div>
+        
+      </div>      
+      
+      <div class="evaluation-section">
+        <h3>
+          Self-Evaluation and Peer Evaluation
+          <i class="fas fa-circle-question info-icon" id="info-evaluation" data-tooltip="You can evaluate yourself and peers after the project is complete."></i>
+        </h3>
+        <div class="unlock-note" id="unlockNote">Will be unlocked after the project is finished</div>
+        <button class="eval-btn green" id="selfEvalBtn"><i class="fas fa-lock"></i> Self-Evaluation</button>
+        <button class="eval-btn orange" id="peerEvalBtn"><i class="fas fa-lock"></i> Peer Evaluation</button>        
+      </div>
+      
+      <!-- Hidden modal/dialog -->
+      <div id="unlockModal" style="display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 20px; border-radius: 12px; text-align: center;">
+          <p>Progress is 100%. Would you like to unlock evaluations?</p>
+          <button id="confirmUnlock" style="margin-top: 10px; padding: 8px 16px;">Unlock Evaluation</button>
+        </div>
+      </div>
+      
+      <!-- Toast Message -->
+      <div id="toast" style="display:none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 20px; border-radius: 6px; z-index: 1000;">Unlock when progress chart reached 100%</div>
+      
+      
+    </main>
+  </body>
+</html>

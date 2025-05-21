@@ -1,3 +1,5 @@
+let addedMembers = [];
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import {
   getFirestore,
@@ -5,8 +7,6 @@ import {
   getDocs,
   addDoc,
   serverTimestamp,
-  setDoc,
-  doc,
   query,
   where,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
@@ -46,8 +46,6 @@ closeSidebar.addEventListener("click", () => {
   sidebar.classList.remove("open");
 });
 
-let addedMembers = [];
-
 const showFeedback = (msg, isError = true) => {
   const feedback = document.getElementById("feedback");
   feedback.textContent = msg;
@@ -56,20 +54,7 @@ const showFeedback = (msg, isError = true) => {
   setTimeout(() => feedback.classList.remove("visible"), 3000);
 };
 
-function updateActivityLog(groupId, uid) {
-  const logRef = doc(db, "groups", groupId, "activityLogs", uid);
-  setDoc(
-    logRef,
-    {
-      lastActive: serverTimestamp(),
-    },
-    { merge: true }
-  );
-}
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  
   // Sidebar toggle logic
   const sidebar = document.getElementById("sidebar");
   const menuIcon = document.querySelector(".menu-icon i");
@@ -107,8 +92,10 @@ async function searchMembers(query) {
     const userSnapshot = await getDocs(usersCol);
     const userList = userSnapshot.docs.map((doc) => doc.data());
 
-    const results = userList.filter((user) =>
-      user.email.toLowerCase().includes(query.toLowerCase())
+    const results = userList.filter(
+      (u) =>
+        u.email.toLowerCase().includes(query.toLowerCase()) &&
+        u.uid !== user.uid // 🔥 Exclude current user
     );
 
     displaySearchResults(results);
@@ -117,6 +104,8 @@ async function searchMembers(query) {
     showFeedback("Failed to load user list.");
   }
 }
+
+window.searchMembers = searchMembers;
 
 function displaySearchResults(results) {
   const resultsContainer = document.getElementById("search-results");
@@ -207,11 +196,20 @@ async function createGroup() {
       });
     }
 
-    await addDoc(collection(db, "groups"), {
+    const groupRef = await addDoc(collection(db, "groups"), {
       name: groupName,
       fullTitle,
       members: addedMembers,
       memberUIDs: addedMembers.map((m) => m.uid),
+      createdAt: serverTimestamp(),
+      createdBy: currentUser.uid, // <--- Add this!
+    });
+
+    // Automatically add a default task to the new group
+    await addDoc(collection(db, `groups/${groupRef.id}/tasks`), {
+      title: "Welcome Task",
+      status: "pending",
+      assignedTo: null,
       createdAt: serverTimestamp(),
     });
 
@@ -233,7 +231,6 @@ async function createGroup() {
     btn.innerText = "CREATE NEW GROUP";
   }
 }
-
 async function loadUserGroups() {
   const user = auth.currentUser;
   if (!user) return;
@@ -247,7 +244,7 @@ async function loadUserGroups() {
   const userGroups = snapshot.docs.filter((doc) => {
     const group = doc.data();
     const isMember = group.members?.some((m) => m.uid === user.uid);
-    const name = (group.name || "").toLowerCase(); // safe fallback
+    const name = (group.name || "").toLowerCase();
     const isNew = name && !seenNames.has(name);
     if (isMember && isNew) {
       seenNames.add(name);
@@ -256,52 +253,69 @@ async function loadUserGroups() {
     return false;
   });
 
-  userGroups.forEach((doc) => {
+  for (const doc of userGroups) {
     const group = doc.data();
     const groupId = doc.id;
 
+    // Fetch tasks for this group
+    const taskSnapshot = await getDocs(collection(db, `groups/${groupId}/tasks`));
+    const tasks = taskSnapshot.docs.map(d => d.data());
+
+    const totalTasks = tasks.length || 1;
+    const completedTasks = tasks.filter(t => t.status === "Done").length;
+    const remainingTasks = tasks.filter(t => t.status === "To Do").length;
+    const userTasks = tasks.filter(t => t.assignedTo === user.uid);
+
+    const progress = Math.round((completedTasks / totalTasks) * 100);
+    const circumference = 188.4;
+    const offset = circumference - (circumference * progress) / 100;
+
     const div = document.createElement("div");
-    div.className = "group-list";
-    div.innerHTML = `<span data-id="${groupId}">${
-      group.fullTitle || group.name.toUpperCase()
-    }</span>`;
+    div.className = "group-card";
+    div.innerHTML = `
+      <div class="group-header">${group.fullTitle}</div>
+      <div class="group-content horizontal">
+        <div class="card-section">
+          <div class="section-title">Progress</div>
+          <div class="progress-container">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="ring-bg" cx="40" cy="40" r="30" />
+              <circle class="ring-fill" cx="40" cy="40" r="30"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${offset}" />
+              <text x="40" y="45" text-anchor="middle" font-size="14" fill="#333">${progress}%</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">Remaining Tasks</div>
+          <div class="section-detail">${remainingTasks}</div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">Your Tasks</div>
+          ${userTasks.length > 0
+            ? userTasks.slice(0, 2).map(t => `<div class="user-task-placeholder">${t.title}</div>`).join("")
+            : '<div class="user-task-placeholder">-</div><div class="user-task-placeholder">-</div>'
+          }
+        </div>
+      </div>
+
+      <div class="group-footer">
+        <a href="projectDetails.html?groupId=${groupId}&groupName=${encodeURIComponent(group.fullTitle)}">View Project Details ></a>
+      </div>
+    `;
+
     groupDisplay.appendChild(div);
-  });
+  }
 }
 
-document.getElementById("member-search").addEventListener("input", (e) => {
-  const query = e.target.value.trim();
-  if (query.length >= 3) {
-    searchMembers(query);
-  } else {
-    document.getElementById("search-results").innerHTML = "";
-  }
-});
-
-document.getElementById("group-display").addEventListener("click", (e) => {
-  if (e.target.tagName === "SPAN") {
-    document.querySelectorAll(".group-list span").forEach((el) => {
-      el.style.backgroundColor = "#fff";
-    });
-    e.target.style.backgroundColor = "#ffeecc";
-
-    const groupName = e.target.textContent.trim();
-    const groupId = e.target.getAttribute("data-id");
-
-    // Save to localStorage
-    localStorage.setItem("selectedGroupId", groupId);
-    localStorage.setItem("selectedGroupName", groupName);
-
-    const encodedName = encodeURIComponent(groupName);
-    window.location.href = `group-page.html?id=${groupId}&name=${encodedName}`;
-  }
-});
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("✅ Logged in as:", user.email);
-    setTimeout(loadUserGroups, 200); 
-    updateActivityLog(groupId, user.uid);
+    setTimeout(loadUserGroups, 200); // give time for auth.currentUser
   } else {
     showFeedback("You must log in to use this page.");
   }

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EduTasker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="projectDetails.css" />
+    <script type="module" src="projectDetails.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="homepage.html" class="sidebar-title">EduTasker</a>
+        <i class="fas fa-times close-icon" id="closeSidebar"></i>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="taskmanagement.html"
+            ><i class="fa-solid fa-tasks"></i>Task Management</a
+          >
+        </li>
+        <li>
+          <a href="commSec1.html"
+            ><i class="fa-solid fa-comments"></i>Communication & Engagement</a
+          >
+        </li>
+        <li>
+          <a href="collabSec1.html"
+            ><i class="fa-solid fa-file-lines"></i>Collaboration & Document
+            Editing</a
+          >
+        </li>
+        <li>
+          <a href="evalSec1.html"
+            ><i class="fa-solid fa-chart-line"></i>Evaluation & Analytics</a
+          >
+        </li>
+        <li>
+          <a href="reward.html"
+            ><i class="fa-solid fa-trophy"></i>Rewards & Achievement</a
+          >
+        </li>
+        <li>
+          <a href="shop.html"><i class="fa-solid fa-store"></i>Shop</a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">© EduTasker</div>
+    </div>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+      <!-- Left Hamburger -->
+      <div class="menu-icon" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- Center Logo -->
+      <img src="illustration.png" alt="Logo" class="logo" />
+
+      <!-- Right Icons -->
+      <div class="nav-bar">
+        <!-- Mobile Three Dots -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+
+        <!-- Icons -->
+        <div class="nav-icons" id="navIcons">
+          <div class="icon notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+            <span class="icon-label">NOTIFICATIONS</span>
+          </div>
+          <div class="icon">
+            <i class="fas fa-cog"></i>
+            <span class="icon-label">SETTINGS</span>
+          </div>
+          <div class="icon">
+            <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
+            <span class="icon-label">ACCOUNT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="title">EDUTASKER</div>
+
+    <div class="section-divider"></div>
+
+    <div class="header">
+      <div class="title-container">
+        <span>Task Management</span>
+        <h1 id="group-title"></h1>
+      </div>
+      <button id="add-task-btn" class="add-task-btn" title="Add Task">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+
+    <div class="page-center-wrapper">
+      <div class="progress-and-actions">
+        <!-- Progress Ring Section -->
+        <div class="progress-section">
+          <div class="section-title">Progress</div>
+          <svg
+            class="progress-ring"
+            width="100"
+            height="100"
+            id="progress-ring-svg"
+          >
+            <circle class="ring-bg" cx="50" cy="50" r="40" />
+            <circle
+              class="ring-fill"
+              id="progress-ring"
+              cx="50"
+              cy="50"
+              r="40"
+              stroke-dasharray="282"
+              stroke-dashoffset="282"
+            />
+            <text
+              id="progress-text"
+              x="50%"
+              y="50%"
+              text-anchor="middle"
+              dy=".3em"
+            >
+              0%
+            </text>
+          </svg>
+        </div>
+
+        <!-- Vertical Separator -->
+        <div class="vertical-separator"></div>
+
+        <!-- Remaining Tasks Section -->
+        <div class="remaining-tasks-section">
+          <div class="section-title">Remaining Task</div>
+          <div class="remaining-tasks-detail" id="remaining-task-count">5</div>
+        </div>
+
+        <!-- Vertical Separator -->
+        <div class="vertical-separator"></div>
+
+        <!-- Buttons Section -->
+        <div class="actions-section">
+          <button class="btn finish-btn" type="button">PROJECT FINISH</button>
+          <p class="btn-description finish-desc">
+            Click when the project is done to unlock the evaluation part.
+          </p>
+
+          <button class="btn terminate-btn" type="button">
+            TERMINATE PROJECT
+          </button>
+          <p class="btn-description terminate-desc">
+            Terminating your project will be permanent.
+          </p>
+        </div>
+      </div>
+      <div id="confirm-terminate" class="modal-hidden confirm-modal">
+        <div class="modal-container">
+          <h3>Are you sure you want to leave this project?</h3>
+          <p>This action is irreversible.</p>
+          <button id="confirm-leave-btn" class="btn danger">Yes, Leave</button>
+          <button id="cancel-leave-btn" class="btn">Cancel</button>
+        </div>
+      </div>
+      
+      <div class="section-title">YOUR TASK</div>
+      <div class="yourTasksList" id="your-tasks-list">
+        <!-- Tasks will be appended here dynamically -->
+      </div>
+
+      <section class="task-status-section">
+        <div class="task-status-header">
+          <h2 class="section-title">TASK STATUS</h2>
+          <button class="kanban-btn" id="kanban-btn">KANBAN BOARD</button>
+        </div>
+
+        <div id="table-view" class="table-view">
+          <!-- To Do Table -->
+          <div class="task-table">
+            <h3 class="kanban-section-title" style="color: #ff2b2b">To Do</h3>
+            <table id="kanban-todo-tbody" class="kanban-table todo-table">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Details</th>
+                  <th>Assigned</th>
+                  <th>Deadline</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="todo-tbody" class="dropzone" data-status="To Do">
+                <tr class="empty-placeholder">
+                  <td colspan="3" style="text-align: center; padding: 1rem; color: #888;">Drop a task here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- In Progress Table -->
+          <div class="task-table">
+            <h3 class="kanban-section-title" style="color: #ff8c00">
+              In Progress
+            </h3>
+            <table
+              id="kanban-inprogress-tbody"
+              class="kanban-table inprogress-table"
+            >
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Details</th>
+                  <th>Assigned</th>
+                  <th>Deadline</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="inprogress-tbody" class="dropzone" data-status="In Progress">        
+                <tr class="empty-placeholder">
+                  <td colspan="3" style="text-align: center; padding: 1rem; color: #888;">Drop a task here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Completed Table -->
+          <div class="task-table">
+            <h3 class="kanban-section-title" style="color: #04b466">
+              Completed
+            </h3>
+            <table
+              id="kanban-completed-tbody"
+              class="kanban-table completed-table"
+            >
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Details</th>
+                  <th>Assigned</th>
+                  <th>Deadline</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="done-tbody" class="dropzone" data-status="Done">
+                <tr class="empty-placeholder">
+                  <td colspan="3" style="text-align: center; padding: 1rem; color: #888;">Drop a task here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="add-task-modal" class="modal-hidden">
+      <div class="modal-container">
+        <h2>Add New Task</h2>
+        <form id="add-task-form">
+          <label for="task-name">Task Name</label>
+          <input type="text" id="task-name" name="taskName" required />
+
+          <label for="task-detail">Task Detail</label>
+          <textarea
+            id="task-detail"
+            name="taskDetail"
+            rows="3"
+            required
+          ></textarea>
+
+          <label for="assign-member">Assign Member</label>
+          <select id="assign-member" name="assignMember" required>
+            <option value="">Select member</option>
+            <!-- Dynamically populated from Firebase -->
+          </select>
+
+          <label for="date-deadline">Date Deadline</label>
+          <input type="date" id="date-deadline" name="dateDeadline" required />
+
+          <label for="time-deadline">Time</label>
+          <input type="time" id="time-deadline" name="timeDeadline" required />
+
+          <button type="submit" class="create-task-btn">Create New Task</button>
+        </form>
+        <button id="modal-close-btn" class="modal-close-btn" title="Close">
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <!--FOOTER-->
+    <footer class="custom-footer">
+      <div class="footer-top">
+        <div class="footer-section branding">
+          <h2 class="logo2">EduTasker</h2>
+          <p>Empowering student collaboration, productivity, and creativity.</p>
+        </div>
+
+        <div class="footer-section newsletter">
+          <p>
+            <strong>GET UPDATES ON STUDENT TOOLS AND PROJECT TIPS</strong>
+          </p>
+          <form class="subscribe-form">
+            <input type="email" placeholder="Your e-mail" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="footer-section contact">
+          <div class="social">
+            <p><strong>Follow Us</strong></p>
+            <div class="icons">
+              <a href="#"
+                ><img
+                  src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png"
+                  alt="Instagram"
+              /></a>
+              <a href="#"
+                ><img
+                  src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png"
+                  alt="Facebook"
+              /></a>
+              <a href="#"
+                ><img
+                  src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png"
+                  alt="Twitter"
+              /></a>
+            </div>
+          </div>
+          <div class="call">
+            <p><strong>Call Us</strong></p>
+            <p>(02) 1234 5678</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 EduTasker. All Rights Reserved</p>
+        <div class="links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms and Conditions</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -12,41 +12,46 @@
 </head>
 
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+   <!-- Sidebar -->
+   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <a href="homepage.html" class="sidebar-title">EduTasker</a>
-        <i class="fas fa-times close-icon" id="closeSidebar"></i>
+      <a href="homepage.html" class="sidebar-title">EduTasker</a>
+      <i class="fas fa-times close-icon" id="closeSidebar"></i>
     </div>
     <ul class="sidebar-menu">
-        <li><a href="Edutasker.html">Task Management</a></li>
-        <li><a href="commSec1.html">Communication & Engagement</a></li>
-        <li><a href="collabSec1.html">Collaboration & Document Editing</a></li>
-        <li><a href="evalSec1.html">Evaluation & Analytics</a></li>
-        <li><a href="reward.html">Rewards & Achievement</a></li>
-        <li><a href="shop.html">Shop</a></li>
+      <li><a href="Edutasker.html"><i class="fa-solid fa-tasks"></i>Task Management</a></li>
+      <li><a href="commSec1.html"><i class="fa-solid fa-comments"></i>Communication & Engagement</a></li>
+      <li><a href="collabSec1.html"><i class="fa-solid fa-file-lines"></i>Collaboration & Document Editing</a></li>
+      <li><a href="evalSec1.html"><i class="fa-solid fa-chart-line"></i>Evaluation & Analytics</a></li>
+      <li><a href="reward.html"><i class="fa-solid fa-trophy"></i>Rewards & Achievement</a></li>
+      <li><a href="shop.html"><i class="fa-solid fa-store"></i>Shop</a></li>
     </ul>
     <div class="sidebar-footer">© EduTasker</div>
-</div>
+  </div>
 
   <!-- Top Navbar -->
   <div class="navbar">
-    <div class="menu-icon">
+    <!-- Left Hamburger -->
+    <div class="menu-icon" onclick="toggleSidebar()">
       <i class="fas fa-bars"></i>
     </div>
 
-    <!-- Centered Logo -->
+    <!-- Center Logo -->
     <img src="illustration.png" alt="Logo" class="logo" />
 
     <!-- Right Icons -->
-    <div class="nav-icons">
-      <div class="icon">
-        <i class="fas fa-cog"></i>
-        <span>SETTINGS</span>
+    <div class="nav-bar">
+      <!-- Mobile Three Dots -->
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-ellipsis-v"></i>
       </div>
-      <div class="icon">
-        <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
-        <span>ACCOUNT</span>
+
+      <!-- Icons -->
+      <div class="nav-icons" id="navIcons">
+        <div class="icon">
+          <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
+          <span class="icon-label">ACCOUNT</span>
+        </div>
       </div>
     </div>
   </div>
@@ -54,32 +59,36 @@
   <!-- Title -->
   <div class="title">EDUTASKER</div>
 
+  <div class="section-divider"></div>
+
   <!--MAIN CONTENT-->
   <!-- Header -->
   <div class="header">
     <span>Collaboration & Document Editing</span>
-    <div id="groupDisplay">Loading group info...</div>
+    <h1 id="group-title"></h1>
   </div>
 
   <div class="section-container">
     <div class="section-header">
       <h2 class="section-title">MEETING</h2>
-      <button class="add-meeting-btn" id="openModalBtn">
+      <button class="add-meeting-btn" id="openMeetingModalBtn">
         <i class="fas fa-plus"></i>
       </button>
     </div>
     <hr class="divider" />
-    <p id="noMeetingsMessage">NO MEETING HAS BEEN SCHEDULED</p>
-    <div id="meetingList" class="meeting-list"></div>
+    <div id="noMeetingsMessage" style="text-align: center; display: none;">
+      No meetings scheduled.
+    </div>
+    <div id="meetingList"></div>
   </div>
 
   <div class="section-container">
     <div class="section-header">
       <h2 class="section-title">FOLDERS</h2>
-      <i class="fas fa-plus add-icon" id="addFolderBtn"></i>
+      <i class="fas fa-plus add-icon" id="openFolderModalBtn"></i>
     </div>
     <hr class="divider" />
-    <p id="noFoldersMessage">NO FOLDER HAS BEEN CREATED</p>
+    <p id="noFoldersMessage" style="display:none;">NO FOLDER HAS BEEN CREATED</p>
     <div id="folderList" class="folder-list"></div>
   </div>
 
@@ -94,26 +103,26 @@
         <form id="linkForm">
           <div class="form-row">
             <label for="linkType">Type:</label>
-            <select id="linkType">
+            <select id="linkType" name="link-type">
               <option value="Google Docs">Google Docs</option>
               <option value="Canva">Canva</option>
               <!-- Add more as needed -->
             </select>
             <button type="button" id="addNewTypeBtn">+</button>
           </div>
-          <input type="text" id="linkDescription" placeholder="Enter description" />
-          <input type="url" id="linkUrl" placeholder="Enter URL (e.g. https://...)" />
+          <input type="text" id="linkDescription" name="link-description" placeholder="Enter description" />
+          <input type="url" id="linkUrl" name="link-url" placeholder="Enter URL (e.g. https://...)" />
           <button type="submit" id="addLinkBtn">Add Link</button>
         </form>
       </div>
     
       <hr class="divider" />
-      <p id="noLinkMessage">NO LINKS HAVE BEEN CREATED</p>
+      <p id="noLinkMessage" style="text-align: center; display: none;">NO LINKS HAVE BEEN CREATED</p>
       <div id="linkList" class="link-list"></div>
     </div>    
   
   <!-- MODAL FOR ADDING NEW TYPE -->
-  <div class="modallink" id="newTypeModal">
+  <div class="modallink" id="newTypeModal" style="display: none;">
     <div class="modal-contentlink">
       <span class="close-modallink" id="closeTypeModal">&times;</span>
       <h3>Add New Link Type</h3>
@@ -123,63 +132,46 @@
   </div>
 
   <!-- Meeting - Modal -->
-  <div class="modal-overlay" id="modalOverlay">
+  <div id="meetingModal" style="display: none;">
     <div class="modal-content">
-      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <span id="closeModalBtn" style="cursor:pointer;">&times;</span>
       <h3>Schedule a Meeting</h3>
       <form id="meetingForm">
-        <label for="meetingName">Name of the Meeting:</label>
-        <input type="text" id="meetingName" name="meetingName" required />
-
-        <label for="meetingType">Type of Meeting:</label>
-        <select id="meetingType" name="meetingType" required>
-          <option value="">Select type</option>
+        <input type="text" id="meeting-name" name="meeting-name" placeholder="Meeting Name" required />
+        
+        <select id="meeting-type" name="meeting-type" required>
+          <option value="">Select Type</option>
           <option value="face">Face to Face</option>
           <option value="online">Online</option>
         </select>
-
-        <div id="faceToFaceFields" class="conditional-fields hidden">
-          <label for="place">Place of Meeting:</label>
-          <input type="text" id="place" name="place" />
-        </div>
-
-        <div id="onlineFields" class="conditional-fields hidden">
-          <label for="onlinePlace">Place of Meeting:</label>
-          <input type="text" id="onlinePlace" name="onlinePlace" />
-
-          <label for="link">Provide Link:</label>
-          <input type="url" id="link" name="link" />
-        </div>
-
-        <label for="startTime">Start Time:</label>
-        <input type="time" id="startTime" name="startTime" required />
-
-        <label for="endTime">End Time:</label>
-        <input type="time" id="endTime" name="endTime" required />
-
-        <button type="submit">Save</button>
+  
+        <input type="text" id="meeting-location" name="meeting-location" placeholder="Location" required />
+        
+        <label>Start Time:</label>
+        <input type="datetime-local" id="meeting-start-time" name="meeting-start-time" required />
+  
+        <label>End Time:</label>
+        <input type="datetime-local" id="meeting-end-time" name="meeting-end-time" required />
+  
+        <input type="url" id="meeting-link" name="meeting-link" placeholder="Online Meeting Link (optional)" />
+  
+        <button type="submit">Create Meeting</button>
       </form>
     </div>
-  </div>
+  </div>  
 
   <!--FOLDER - MODAL-->
-  <div id="folderModal" class="modal">
+  <div id="folderModal" style="display:none;">
     <div class="modal-content">
-      <span class="close" id="closeFolderModal">&times;</span>
-      <h2>Create Folder</h2>
+      <span id="closeFolderModal" style="cursor:pointer;">&times;</span>
+      <h3>Create New Folder</h3> <!-- Title added here -->
       <form id="folderForm">
-        <label for="folderName">Name of Folder:</label>
-        <input type="text" id="folderName" name="folderName" required />
-
-        <label for="folderColor">Pick Folder Color:</label>
-        <input type="color" id="folderColor" name="folderColor" value="#f58a07" />
-
-        <button type="submit" class="modal-btn">Add Folder</button>
+        <input type="text" id="folderName" placeholder="Folder name" required />
+        <input type="color" id="folderColor" value="#ffcc00" />
+        <button type="submit">Create Folder</button>
       </form>
     </div>
   </div>
-  </div>
-
 
   <!--FOOTER-->
   <footer class="custom-footer">

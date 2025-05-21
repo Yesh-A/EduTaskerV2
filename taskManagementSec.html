@@ -12,8 +12,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="collabSec1.css" />
-    <script type="module" src="collabSec1.js" defer></script>
+    <link rel="stylesheet" href="taskManagementSec.css" />
+    <script type="module" src="taksManagementSec.js" defer></script>
   </head>
   <body>
     <!-- Sidebar -->
@@ -88,7 +88,7 @@
 
     <!-- Header -->
     <header>
-      <span>Collaboration & Document Editing</span>
+      <span>Task Management</span>
       <button id="openModal" class="header-add-btn">+</button>
     </header>
 
@@ -112,10 +112,11 @@
 
           <label for="member-search">Add Members</label>
           <input
-            type="text"
-            id="member-search"
-            placeholder="Search by UID or Email"
-          />
+          type="text"
+          id="member-search"
+          placeholder="Search members..."
+          oninput="searchMembers(this.value)"
+        />
 
           <div class="search-results" id="search-results"></div>
 
@@ -130,6 +131,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="custom-footer">

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>EduTasker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="commSec2.css" />
+  <script type="module" src="commSec2.js" defer></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="homepage.html" class="sidebar-title">EduTasker</a>
+      <i class="fas fa-times close-icon" id="closeSidebar"></i>
+    </div>
+    <ul class="sidebar-menu">
+      <li>
+        <a href="taskmanagement.html"><i class="fa-solid fa-tasks"></i>Task Management</a>
+      </li>
+      <li>
+        <a href="commSec1.html"><i class="fa-solid fa-comments"></i>Communication & Engagement</a>
+      </li>
+      <li>
+        <a href="collabSec1.html"><i class="fa-solid fa-file-lines"></i>Collaboration & Document
+          Editing</a>
+      </li>
+      <li>
+        <a href="evalSec1.html"><i class="fa-solid fa-chart-line"></i>Evaluation & Analytics</a>
+      </li>
+      <li>
+        <a href="reward.html"><i class="fa-solid fa-trophy"></i>Rewards & Achievement</a>
+      </li>
+      <li>
+        <a href="shop.html"><i class="fa-solid fa-store"></i>Shop</a>
+      </li>
+    </ul>
+    <div class="sidebar-footer">© EduTasker</div>
+  </div>
+
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <!-- Left Hamburger -->
+    <div class="menu-icon" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Center Logo -->
+    <img src="illustration.png" alt="Logo" class="logo" />
+
+    <!-- Right Icons -->
+    <div class="nav-bar">
+      <!-- Mobile Three Dots -->
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+
+      <!-- Icons -->
+      <div class="nav-icons" id="navIcons">
+        <div class="icon notification">
+          <i class="fas fa-bell"></i>
+          <span class="badge">3</span>
+          <span class="icon-label">NOTIFICATIONS</span>
+        </div>
+        <div class="icon">
+          <i class="fas fa-cog"></i>
+          <span class="icon-label">SETTINGS</span>
+        </div>
+        <div class="icon">
+          <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
+          <span class="icon-label">ACCOUNT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="title">EDUTASKER</div>
+  <div class="section-divider"></div>
+
+  <div class="header">
+    <span>Communication & Engagement</span>
+    <div id="groupDisplay">Loading group info...</div>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-sidebar">
+      <div class="tab active" data-tab="general">GENERAL CONVERSATION</div>
+      <div class="tab" data-tab="announcement">ANNOUNCEMENT</div>
+      <div class="tab" data-tab="personal">PERSONAL MESSAGE</div>
+    </div>
+
+    <div class="chat-main">
+      <!-- Shared Chat Header -->
+      <div class="chat-header">
+        <h2 id="chat-title">GENERAL CONVERSATION</h2>
+      </div>
+
+      <!-- General Conversation -->
+      <div class="chat-section" id="general-section">
+        <div class="chat-box" id="general-box"></div>
+
+        <div class="chat-input">
+          <button id="attachBtn-general" title="Attach File">
+            <i class="fas fa-paperclip"></i>
+          </button>
+          <input type="file" id="fileInput-general" style="display: none" />
+          <div id="filePreview-general" style="font-size: 12px; color: #444; margin-bottom: 5px"></div>
+
+          <button id="emojiBtn-general" title="Insert Emoji">
+            <i class="far fa-smile"></i>
+          </button>
+          <input type="text" id="messageInput-general" placeholder="Type your message..." />
+          <button id="sendBtn-general" title="Send Message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div id="emojiPicker-general" style="position: absolute; z-index: 999"></div>
+      </div>
+
+      <!-- Announcement -->
+      <div class="chat-section" id="announcement-section" style="display: none">
+        <div class="chat-box" id="announcement-box"></div>
+        <div class="chat-input announcement-input">
+          <!-- Subject input -->
+          <input type="text" id="announcementSubject" class="announcement-subject" placeholder="Add a subject" />
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <button data-command="bold" title="Bold"><b>B</b></button>
+            <button data-command="italic" title="Italic"><i>I</i></button>
+            <button data-command="underline" title="Underline"><u>U</u></button>
+            <button data-command="strikeThrough" title="Strikethrough"><s>S</s></button>
+            <button data-command="insertUnorderedList" title="Bullet List">•</button>
+            <button data-command="insertOrderedList" title="Numbered List">1.</button>
+            <button data-command="formatBlock" data-value="blockquote" title="Quote">“”</button>
+            <button id="announcementLinkBtn" title="Insert Link"><i class="fas fa-link"></i></button>
+            <button id="emojiBtn-announcement" title="Insert Emoji"><i class="fas fa-smile"></i></button>
+          </div>
+          <div id="emojiPicker-announcement" class="emoji-picker"></div>
+
+          <!-- Message input -->
+          <div id="announcementInput" class="announcement-message" contenteditable="true" placeholder="Type a message"
+            style="min-height: 100px; border: 1px solid #ccc; padding: 10px;"></div>
+
+          <!-- Post button -->
+          <button id="announcementSendBtn" class="announcement-post">Post</button>
+        </div>
+      </div>
+
+      <!-- Personal Message -->
+      <div class="chat-section" id="personal-section" style="display: none">
+        <div class="personal-layout">
+          <!-- Member List -->
+          <div id="member-list" class="member-list-view">
+            <h3 class="section-title">Select a Member</h3>
+            <ul class="member-list" id="personalMemberList"></ul>
+          </div>
+      
+          <!-- Personal Chat -->
+          <div class="personal-chat" id="personalChat" style="display: none">
+            <div class="chat-header personal-chat-header">
+              <button id="backToList" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+              </button>
+              <span id="personalChatUserName">Chat</span>
+            </div>
+      
+            <div class="chat-box" id="personal-box"></div>
+      
+            <div class="chat-input">
+              <button id="attachBtn-personal" title="Attach File">
+                <i class="fas fa-paperclip"></i>
+              </button>
+              <input type="file" id="fileInput-personal" style="display: none" />
+              <div id="filePreview-personal" style="font-size: 12px; color: #444; margin-bottom: 5px"></div>
+      
+              <button id="emojiBtn-personal" title="Insert Emoji">
+                <i class="far fa-smile"></i>
+              </button>
+              <input type="text" id="messageInput-personal" placeholder="Type a personal message..." />
+              <button id="sendBtn-personal" title="Send Message">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+            <div id="emojiPicker-personal" style="position: absolute; z-index: 999"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="custom-footer">
+    <div class="footer-top">
+      <div class="footer-section branding">
+        <h2 class="logo2">EduTasker</h2>
+        <p>Empowering student collaboration, productivity, and creativity.</p>
+      </div>
+      <div class="footer-section newsletter">
+        <p><strong>GET UPDATES ON STUDENT TOOLS AND PROJECT TIPS</strong></p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Your e-mail" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-section contact">
+        <div class="social">
+          <p><strong>Follow Us</strong></p>
+          <div class="icons">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png" alt="Instagram" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png" alt="Twitter" /></a>
+          </div>
+        </div>
+        <div class="call">
+          <p><strong>Call Us</strong></p>
+          <p>(02) 1234 5678</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 EduTasker. All Rights Reserved</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

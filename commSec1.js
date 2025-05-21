@@ -1,12 +1,26 @@
+/*function toggleMenu() {
+  document.getElementById('navIcons').classList.toggle('show');
+}
+
+// Optional: close on outside click
+document.addEventListener('click', function (e) {
+  const navIcons = document.getElementById('navIcons');
+  const toggleBtn = document.querySelector('.menu-toggle');
+  if (!navIcons.contains(e.target) && !toggleBtn.contains(e.target)) {
+    navIcons.classList.remove('show');
+  }
+});*/
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import {
   getFirestore,
   collection,
   getDocs,
   addDoc,
-  serverTimestamp,
   setDoc,
   doc,
+  serverTimestamp,
   query,
   where,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
@@ -29,23 +43,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const toggleBtn = document.querySelector(".menu-toggle");
-toggleBtn.addEventListener("click", () => {
-  document.getElementById("navIcons").classList.toggle("show");
-});
-
-const sidebar = document.getElementById("sidebar");
-const menuIcon = document.querySelector(".menu-icon i");
-const closeSidebar = document.getElementById("closeSidebar");
-
-menuIcon.addEventListener("click", () => {
-  sidebar.classList.add("open");
-});
-
-closeSidebar.addEventListener("click", () => {
-  sidebar.classList.remove("open");
-});
-
 let addedMembers = [];
 
 const showFeedback = (msg, isError = true) => {
@@ -58,32 +55,32 @@ const showFeedback = (msg, isError = true) => {
 
 function updateActivityLog(groupId, uid) {
   const logRef = doc(db, "groups", groupId, "activityLogs", uid);
-  setDoc(
-    logRef,
-    {
-      lastActive: serverTimestamp(),
-    },
-    { merge: true }
-  );
+  setDoc(logRef, {
+    lastActive: serverTimestamp()
+  }, { merge: true });
 }
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  
+
+
   // Sidebar toggle logic
-  const sidebar = document.getElementById("sidebar");
-  const menuIcon = document.querySelector(".menu-icon i");
-  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById('sidebar');
+  const menuIcon = document.querySelector('.menu-icon i');
+  const closeSidebar = document.getElementById('closeSidebar');
 
   if (menuIcon && sidebar && closeSidebar) {
-    menuIcon.addEventListener("click", () => {
-      sidebar.classList.add("open");
+    menuIcon.addEventListener('click', () => {
+      sidebar.classList.add('open');
     });
 
-    closeSidebar.addEventListener("click", () => {
-      sidebar.classList.remove("open");
+    closeSidebar.addEventListener('click', () => {
+      sidebar.classList.remove('open');
     });
   }
+
+  const toggleBtn = document.querySelector('.menu-toggle');
+  toggleBtn.addEventListener('click', () => {
+    document.getElementById('navIcons').classList.toggle('show');
+  });
 
   document.getElementById("openModal").addEventListener("click", () => {
     document.getElementById("modalContainer").classList.remove("hidden");
@@ -134,9 +131,7 @@ function displaySearchResults(results) {
           <div><strong>UID:</strong> ${user.uid}</div>
         </div>
       </div>
-      <button onclick='addMember("${user.email}", "${user.uid}", "${
-      user.photoURL || "https://via.placeholder.com/40"
-    }")'>+</button>
+      <button onclick='addMember("${user.email}", "${user.uid}", "${user.photoURL || "https://via.placeholder.com/40"}")'>+</button>
     `;
     resultsContainer.appendChild(userDiv);
   });
@@ -182,21 +177,16 @@ async function createGroup() {
   const btn = document.querySelector(".create-btn");
 
   if (!groupName) return showFeedback("Please enter a group name.");
-  if (addedMembers.length === 0)
-    return showFeedback("Please add at least one member.");
+  if (addedMembers.length === 0) return showFeedback("Please add at least one member.");
 
   const fullTitle = groupName.toUpperCase();
   btn.disabled = true;
   btn.innerText = "Creating...";
 
   try {
-    const groupQuery = query(
-      collection(db, "groups"),
-      where("fullTitle", "==", fullTitle)
-    );
+    const groupQuery = query(collection(db, "groups"), where("fullTitle", "==", fullTitle));
     const existingGroups = await getDocs(groupQuery);
-    if (!existingGroups.empty)
-      return showFeedback("A group with this name already exists.");
+    if (!existingGroups.empty) return showFeedback("A group with this name already exists.");
 
     const currentUser = auth.currentUser;
     if (!addedMembers.some((m) => m.uid === currentUser.uid)) {
@@ -211,7 +201,7 @@ async function createGroup() {
       name: groupName,
       fullTitle,
       members: addedMembers,
-      memberUIDs: addedMembers.map((m) => m.uid),
+      memberUIDs: addedMembers.map(m => m.uid), 
       createdAt: serverTimestamp(),
     });
 
@@ -246,25 +236,27 @@ async function loadUserGroups() {
 
   const userGroups = snapshot.docs.filter((doc) => {
     const group = doc.data();
-    const isMember = group.members?.some((m) => m.uid === user.uid);
-    const name = (group.name || "").toLowerCase(); // safe fallback
-    const isNew = name && !seenNames.has(name);
+    if (!group.name || typeof group.name !== "string") return false; // prevent error
+  
+    const isMember = Array.isArray(group.members) && group.members.some((m) => m.uid === user.uid);
+    const name = group.name.toLowerCase();
+    const isNew = !seenNames.has(name);
+  
     if (isMember && isNew) {
       seenNames.add(name);
       return true;
     }
     return false;
   });
-
+  
+  
   userGroups.forEach((doc) => {
     const group = doc.data();
     const groupId = doc.id;
-
+  
     const div = document.createElement("div");
     div.className = "group-list";
-    div.innerHTML = `<span data-id="${groupId}">${
-      group.fullTitle || group.name.toUpperCase()
-    }</span>`;
+    div.innerHTML = `<span data-id="${groupId}">${group.fullTitle || group.name.toUpperCase()}</span>`;
     groupDisplay.appendChild(div);
   });
 }
@@ -287,13 +279,9 @@ document.getElementById("group-display").addEventListener("click", (e) => {
 
     const groupName = e.target.textContent.trim();
     const groupId = e.target.getAttribute("data-id");
-
-    // Save to localStorage
-    localStorage.setItem("selectedGroupId", groupId);
-    localStorage.setItem("selectedGroupName", groupName);
-
     const encodedName = encodeURIComponent(groupName);
-    window.location.href = `group-page.html?id=${groupId}&name=${encodedName}`;
+
+    window.location.href = `commSec2.html?id=${groupId}&name=${encodedName}`;
   }
 });
 
@@ -301,6 +289,8 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("✅ Logged in as:", user.email);
     setTimeout(loadUserGroups, 200); 
+    updateActivityLog(groupId, user.uid);
+  } if (groupId) {
     updateActivityLog(groupId, user.uid);
   } else {
     showFeedback("You must log in to use this page.");

@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <title>EduTasker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="accounts.css" />
 </head>
@@ -19,7 +18,7 @@
             <i class="fas fa-times close-icon" id="closeSidebar"></i>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="Edutasker.html">Task Management</a></li>
+            <li><a href="taskmanagement.html">Task Management</a></li>
             <li><a href="commSec1.html">Communication & Engagement</a></li>
             <li><a href="collabSec1.html">Collaboration & Document Editing</a></li>
             <li><a href="evalSec1.html">Evaluation & Analytics</a></li>
@@ -61,35 +60,57 @@
     <div class="section-divider2"></div>
 
     <!-- Account Info -->
-    <div class="account-box">
-        <div class="account-info">
-            <div class="profile-section">
-                <div class="profile-image">
-                    <img id="profileImage" src="default-profile.jpg" alt="Profile Picture">
-                    <button id="changePicBtn">Change Picture</button>
-                    <input type="file" id="uploadPic" style="display: none" />
-                    <span id="uploadSpinner" style="display: none;">Uploading...</span>
-                </div>
-                <div class="user-details">
-                    <p><strong>User ID:</strong> <span id="userID"></span></p>
-                    <p><strong>Username:</strong> <span id="username"></span></p>
-                </div>
+    <div class="container">
+        <div class="profile-pic-container">
+            <img id="profileImage" src="default-avatar.png" alt="Profile Picture" />
+            <button id="editPicBtn"><i class="fas fa-pen"></i> Edit</button>
+            <input type="file" id="uploadPic" accept="image/*" hidden />
+            <div id="uploadSpinner" class="spinner" style="display: none;"></div>
+        
+            <div id="editPicBubble" class="speech-bubble hidden">
+                <button id="changePicBtn">Change Profile Picture</button>
+                <button id="changeColorBtn">Change Background Color</button>
             </div>
+        
+            <div class="user-info">
+                <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+                <p><strong>User ID:</strong> <span id="userID">Loading...</span></p>
+            </div>
+
+            <input type="color" id="borderColorPicker" class="hidden">
+
+            <button id="logoutBtn">Logout</button>
         </div>
 
-        <div class="editable-info">
-            <label>Nickname: <input type="text" id="nickname" /></label>
-            <label>Birthday: <input type="date" id="birthday" /></label>
-            <label>Age: <input type="number" id="age" /></label>
-            <label>Pronouns: <input type="text" id="pronouns" /></label>
-            <label>Bio: <input type="text" id="bio" /></label>
-            <label>Availability: <input type="text" id="availability" /></label>
-        </div>
+        <main class="main-content">
+            <h1>Profile</h1>
+            <form id="profileForm" class="read-only">
+                <label for="nickname">Nickname</label>
+                <input type="text" id="nickname" disabled />
 
-        <div class="actions">
-            <button id="saveBtn" disabled>Save</button>
-            <button id="resetBtn">Reset</button>
-        </div>
+                <label for="birthday">Birthday</label>
+                <input type="date" id="birthday" disabled />
+
+                <label for="age">Age</label>
+                <input type="number" id="age" min="0" disabled />
+
+                <label for="pronouns">Pronouns</label>
+                <input type="text" id="pronouns" disabled />
+
+                <label for="bio">Bio</label>
+                <textarea id="bio" rows="4" disabled></textarea>
+
+                <label for="availability">Availability</label>
+                <input type="text" id="availability" disabled />
+
+                <div class="form-actions">
+                    <button type="button" id="editBtn" class="btn edit">Edit</button>
+                    <button type="button" id="saveExitBtn" class="btn save hidden">Save & Exit</button>
+                    <button type="button" id="deleteChangesBtn" class="btn reset hidden">Delete Changes</button>
+                    <button type="button" id="feedbackBtn" class="btn feedback">Feedback</button>
+                </div>
+            </form>
+        </main>
     </div>
 
     <!-- Footer -->
@@ -112,12 +133,9 @@
                 <div class="social">
                     <p><strong>Follow Us</strong></p>
                     <div class="icons">
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png"
-                                alt="Instagram" /></a>
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png"
-                                alt="Facebook" /></a>
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png"
-                                alt="Twitter" /></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png" alt="Instagram" /></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png" alt="Facebook" /></a>
+                        <a href="#"><img src="https://img.icons8.com/ios-filled/20/ffffff/twitter.png" alt="Twitter" /></a>
                     </div>
                 </div>
                 <div class="call">

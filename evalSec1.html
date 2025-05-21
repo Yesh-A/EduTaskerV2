@@ -8,11 +8,9 @@
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="reward4.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="evalSec1.css" />
+    <script type="module" src="evalSec1.js"></script>
   </head>
   <body>
     <!-- Sidebar -->
@@ -22,7 +20,7 @@
           <i class="fas fa-times close-icon" id="closeSidebar"></i>
       </div>
       <ul class="sidebar-menu">
-          <li><a href="Edutasker.html">Task Management</a></li>
+          <li><a href="taskmanagement.html">Task Management</a></li>
           <li><a href="commSec1.html">Communication & Engagement</a></li>
           <li><a href="collabSec1.html">Collaboration & Document Editing</a></li>
           <li><a href="evalSec1.html">Evaluation & Analytics</a></li>
@@ -57,62 +55,17 @@
     <!-- Title -->
     <div class="title">EDUTASKER</div>
 
-    <!-- MAIN CONTENTS -->
-    <header class="top-bar">
-      <div class="top-separator"></div>
-      <h1 class="rewards-title">REWARDS</h1>
-      <div class="coin-wrapper">
-        <div class="coin-display">
-          <img src="Coin.png" alt="Coin" />
-          <span>0</span>
-          <button class="add-coin-btn">+</button>
-        </div>
-      </div>      
-    </header>
-
-    <!-- Daily Rewards -->
-    <section class="section">
-      <h2>DAILY REWARDS</h2>
-      <div class="daily-container">
-        <div class="daily-rewards">
-          <div class="reward-card">
-            <div class="coin-background">
-              <img src="Coin.png" alt="Daily Reward" />
-            </div>
-            <button class="claim-button">CLAIM</button>
-          </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Achievements -->
-    <section class="section">
-      <h2>ACHIEVEMENTS</h2>
-      <div id="no-achievements" class="no-achievements">
-        <p>No Claimable Awards Yet</p>
-      </div>
-
-      <div id="achievements" class="achievements">
-        <div class="achievement-card">
-          <img src="Cooporative.png" alt="MVP" />
-          <p>COOPERATIVE</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-        <div class="achievement-card">
-          <img src="Creative.png" alt="Most Likable" />
-          <p>CREATIVE</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-        <div class="achievement-card">
-          <img src="Social.png" alt="Best Work" />
-          <p>SOCIAL</p>
-          <button>CLAIM REWARDS</button>
-        </div>
-      </div>
-    </section>
-
     <div class="section-divider"></div>
+
+
+<!--MAIN CONTENT-->
+ <!-- Header -->
+ <div class="header">
+  <span>Evaluation & Analytics</span>
+</div>
+<div class="group-list" id="groupList">
+  <!-- Group items will be injected here -->
+</div>
 
     <!--FOOTER-->
     <footer class="custom-footer">
@@ -168,7 +121,5 @@
         </div>
       </div>
     </footer>
-
-    <script type="module" src="reward.js"></script>
   </body>
 </html>

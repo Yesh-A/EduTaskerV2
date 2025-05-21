@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!---------------------------INTERNAL LINKS--------------------------------->
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.cdnfonts.com/css/glacial-indifference-2"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link rel="stylesheet" href="Dashboardcss.css" />
+    <link rel="stylesheet" href="groupModal.css" />
+    <link rel="stylesheet" href="tracker.css" />
+    <link rel="stylesheet" href="projectDetail.css" />
+    <meta charset="utf-8" />
+    <meta content="Width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EduTasker</title>
+  </head>
+  <!---------------------------INTERNAL LINKS--------------------------------->
+
+  <body class="bg-white">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="homepage.html" class="sidebar-title">EduTasker</a>
+        <i class="fas fa-times close-icon" id="closeSidebar"></i>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="Edutasker.html"
+            ><i class="fa-solid fa-tasks"></i>Task Management</a
+          >
+        </li>
+        <li>
+          <a href="commSec1.html"
+            ><i class="fa-solid fa-comments"></i>Communication & Engagement</a
+          >
+        </li>
+        <li>
+          <a href="collabSec1.html"
+            ><i class="fa-solid fa-file-lines"></i>Collaboration & Document
+            Editing</a
+          >
+        </li>
+        <li>
+          <a href="evalSec1.html"
+            ><i class="fa-solid fa-chart-line"></i>Evaluation & Analytics</a
+          >
+        </li>
+        <li>
+          <a href="reward.html"
+            ><i class="fa-solid fa-trophy"></i>Rewards & Achievement</a
+          >
+        </li>
+        <li>
+          <a href="shop.html"><i class="fa-solid fa-store"></i>Shop</a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">© EduTasker</div>
+    </div>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+      <!-- Left Hamburger -->
+      <div class="menu-icon" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- Center Logo -->
+      <img src="illustration.png" alt="Logo" class="logo" />
+
+      <!-- Right Icons -->
+      <div class="nav-bar">
+        <!-- Mobile Three Dots -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+
+        <!-- Icons -->
+        <div class="nav-icons" id="navIcons">
+          <div class="icon notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+            <span class="icon-label">NOTIFICATIONS</span>
+          </div>
+          <div class="icon">
+            <i class="fas fa-cog"></i>
+            <span class="icon-label">SETTINGS</span>
+          </div>
+          <div class="icon">
+            <a href="accounts.html"><i class="fas fa-user-circle"></i></a>
+            <span class="icon-label">ACCOUNT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="title">EDUTASKER</div>
+    <div class="section-divider"></div>
+
+    <!-----------------------------TASK MANAGEMENT-------------------------------->
+
+    <div
+      class="task-management bg-[#F58A07] text-white flex items-center justify-between"
+    >
+      <h2 class="taskText">Task Management</h2>
+      <div class="relative w-16 h-16 flex items-center justify-center">
+        <button id="NewTaskBtn" class="text-[#FEBF00]">
+          <i class="fas fa-plus fa-3x hover:animate-pulse"></i>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <img class="Texture" src="texture.webp" alt="" />
+    </div>
+
+    <div>
+      <h2 class="TextSelectProj">SELECT PROJECT</h2>
+    </div>
+    <!-----------------------------TASK MANAGEMENT-------------------------------->
+
+    <!-----------------------------NEW GROUP MODAL--------------------------------->
+
+    <!-- Group Modal -->
+    <!-- Modal Container -->
+    <div class="modal-container hidden" id="modalContainer">
+      <div class="modal">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <label for="group-name">Group Name</label>
+        <input
+          type="text"
+          id="group-name"
+          placeholder="Enter group name"
+          required
+        />
+
+        <label for="member-search">Add Members</label>
+        <input
+          type="text"
+          id="member-search"
+          placeholder="Search by UID or Email"
+        />
+
+        <div class="search-results" id="search-results"></div>
+
+        <h3>Added Members:</h3>
+        <div id="added-members"></div>
+
+        <div id="feedback" class="feedback-msg"></div>
+
+        <button class="create-btn" onclick="createGroup()">
+          CREATE NEW GROUP
+        </button>
+      </div>
+    </div>
+  </div>
+    <!-----------------------------NEW GROUP MODAL--------------------------------->
+
+    <!--------------------------------TRACKER------------------------------------->
+
+    <div id="parent-container"></div>
+
+    <!--------------------------------TRACKER------------------------------------->
+
+    <!-----------------------------NEW TASK--------------------------------------->
+    <div
+      id="taskModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1001]"
+    >
+      <div
+        class="bg-white w-96 p-6 rounded-lg shadow-lg relative modal-content"
+        style="font-family: 'Glacial Indifference', sans-serif"
+      >
+        <h2 class="text-2xl font-bold text-[#1A5E63] mb-4">NEW TASK</h2>
+
+        <!-- Task Name -->
+        <div class="mb-4">
+          <label class="block text-[#1A5E63] font-semibold mb-1"
+            >Task Name</label
+          >
+          <input
+            type="text"
+            id="taskNameInput"
+            class="w-full px-3 py-2 border border-[#1A5E63] rounded-md"
+          />
+        </div>
+
+        <!-- Task Detail -->
+        <div class="mb-4">
+          <label class="block text-[#1A5E63] font-semibold mb-1"
+            >Task Detail</label
+          >
+          <textarea
+            id="taskDetailInput"
+            class="w-full px-3 py-2 border border-[#1A5E63] rounded-md"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <!-- Assign Member -->
+        <div class="mb-4">
+          <label class="block text-[#1A5E63] font-semibold mb-1"
+            >Assign Member</label
+          >
+          <div class="relative">
+            <input
+              id="taskMemberInput"
+              type="text"
+              class="w-full px-3 py-2 pr-10 border border-[#1A5E63] rounded-md"
+              placeholder="Type member name"
+            />
+            <button
+              id="addTaskMemberBtn"
+              class="absolute top-1/2 right-2 transform -translate-y-1/2 text-[#1A5E63] p-1 rounded-full transition-all duration-200"
+              style="display: none"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+            <div
+              id="taskMemberSuggestions"
+              class="absolute top-full left-0 w-full bg-white border border-[#1A5E63] rounded-md mt-1 max-h-40 overflow-y-auto z-10 hidden"
+            ></div>
+          </div>
+          <div id="taskMemberList" class="flex flex-wrap gap-2 mt-2"></div>
+          <div class="mt-2 flex items-center">
+            <input type="checkbox" id="assignAllCheckbox" class="mr-2" />
+            <label for="assignAllCheckbox" class="text-[#1A5E63]"
+              >Assign to all members</label
+            >
+          </div>
+        </div>
+
+        <!-- Date Deadline -->
+        <div class="mb-4">
+          <label class="block text-[#1A5E63] font-semibold mb-1"
+            >Date Deadline</label
+          >
+          <input
+            type="date"
+            id="taskDateInput"
+            class="w-full px-3 py-2 border border-[#1A5E63] rounded-md"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-[#1A5E63] font-semibold mb-1"
+            >Time Deadline</label
+          >
+          <input
+            type="time"
+            id="taskTimeInput"
+            class="w-full px-3 py-2 border border-[#1A5E63] rounded-md"
+          />
+        </div>
+
+        <!-- Create Task Button -->
+        <button
+          id="createTaskBtn"
+          class="w-full bg-[#04B466] text-white py-2 rounded-lg font-bold"
+        >
+          CREATE TASK
+        </button>
+
+        <!-- Close Button -->
+        <button
+          onclick="closeTaskModal()"
+          class="absolute top-2 right-2 text-[#1A5E63] p-2 rounded-full"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!------------------TERMINATION CONFIRMATION MODAL --------------------------->
+    <div
+      id="terminateConfirmModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[1000]"
+    >
+      <div class="bg-white p-6 rounded-lg max-w-sm w-full mx-4">
+        <h3 class="text-xl font-bold mb-4 text-red-600">Confirm Termination</h3>
+        <p class="mb-4">
+          Are you sure you want to permanently delete this project? This action
+          cannot be undone.
+        </p>
+        <div class="flex gap-4 justify-end">
+          <button
+            id="terminateCancel"
+            class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            id="terminateConfirm"
+            class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg"
+          >
+            Delete Project
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!------------------ TIME ZONE SCRIPT --------------------------->
+
+    <script>
+      document
+        .getElementById("NewTaskBtn")
+        .addEventListener("click", function () {
+          const today = new Date();
+          const dateInput = document.getElementById("taskDateInput");
+          const timeInput = document.getElementById("taskTimeInput");
+
+          dateInput.min = today.toISOString().split("T")[0];
+
+          if (dateInput.value === dateInput.min) {
+            const hours = String(today.getHours()).padStart(2, "0");
+            const minutes = String(today.getMinutes()).padStart(2, "0");
+            timeInput.min = `${hours}:${minutes}`;
+          } else {
+            timeInput.removeAttribute("min");
+          }
+        });
+
+      document
+        .getElementById("taskDateInput")
+        .addEventListener("change", function () {
+          const today = new Date();
+          const timeInput = document.getElementById("taskTimeInput");
+
+          if (this.value === today.toISOString().split("T")[0]) {
+            const hours = String(today.getHours()).padStart(2, "0");
+            const minutes = String(today.getMinutes()).padStart(2, "0");
+            timeInput.min = `${hours}:${minutes}`;
+          } else {
+            timeInput.removeAttribute("min");
+          }
+        });
+    </script>
+
+    <!------------------ TIME ZONE SCRIPT --------------------------->
+
+    <!---------------------SCRIPT------------------------->
+    <script type="module" src="groupModal.js"></script>
+    <script type="module" src="tracker.js"></script>
+    <!---------------------SCRIPT------------------------->
+  </body>
+</html>
